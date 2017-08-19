@@ -16,7 +16,7 @@ public class Client {
     }
 
     public Client(String name, Address address) {
-        this(name, address, ClientStatus.STANDARD, new Money(), new Money());
+        this(name, address, ClientStatus.STANDARD, Money.ZERO, Money.ZERO);
     }
 
     public boolean canAfford(Money money) {

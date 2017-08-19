@@ -9,7 +9,7 @@ public class Purchase {
     private Client buyer;
     private LocalDateTime purchaseDate = LocalDateTime.now();
 
-    public Purchase(Collection<Picture> items, Client buyer) {
+    public Purchase(Client buyer, Collection<Picture> items) {
         this.items = new LinkedList<>(items);
         this.buyer = buyer;
     }

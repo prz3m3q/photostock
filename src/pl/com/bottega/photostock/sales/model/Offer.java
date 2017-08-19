@@ -1,6 +1,7 @@
 package pl.com.bottega.photostock.sales.model;
 
 import java.util.Collection;
+import java.util.Collections;
 import java.util.LinkedList;
 
 public class Offer {
@@ -20,5 +21,13 @@ public class Offer {
 
     public Money getTotalCost() {
         return null;
+    }
+
+    public Collection<Picture> getItems() {
+        return Collections.unmodifiableCollection(items);
+    }
+
+    public void setItems(Collection<Picture> items) {
+        this.items = items;
     }
 }

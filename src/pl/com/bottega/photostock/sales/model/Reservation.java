@@ -1,10 +1,11 @@
 package pl.com.bottega.photostock.sales.model;
 
 import java.util.Collection;
+import java.util.LinkedList;
 
 public class Reservation {
     private Client owner;
-    private Collection<Picture> items;
+    private Collection<Picture> items = new LinkedList<>();
 
     public Reservation(Client owner) {
         this.owner = owner;
@@ -17,7 +18,7 @@ public class Reservation {
     }
 
     public Offer generateOffer() {
-        return null;
+        return new Offer(items);
     }
 
     public int getItemsCount() {

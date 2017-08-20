@@ -42,4 +42,19 @@ public class Client {
         balance = balance.add(amount);
         transaction.add(new Transaction(amount, "Recharge account"));
     }
+
+    public ClientStatus getStatus() {
+        return status;
+    }
+
+    @Override
+    public String toString() {
+        return "\nClient{" +
+            "name='" + name + '\'' +
+            '}';
+    }
+
+    public int discountPercent() {
+        return status.discountPercent();
+    }
 }

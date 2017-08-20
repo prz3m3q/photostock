@@ -22,7 +22,7 @@ public class Picture {
     }
 
     public Money calculatePrice(Client client) {
-        return price;
+        return price.percent(100 - client.discountPercent());
     }
 
     public boolean isAvalible() {
@@ -72,5 +72,13 @@ public class Picture {
 
     public Long getNumber() {
         return number;
+    }
+
+    @Override
+    public String toString() {
+        return "\nPicture{" +
+            "number=" + number +
+            ", price=" + price +
+            '}';
     }
 }

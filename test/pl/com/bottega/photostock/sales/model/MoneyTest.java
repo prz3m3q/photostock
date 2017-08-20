@@ -70,4 +70,13 @@ public class MoneyTest {
         assertFalse(fiftyCredit.lt(fiftyCredit));
         assertFalse(fiftyCredit.gt(fiftyCredit));
     }
+
+    @Test
+    public void shouldCalculatePercent() {
+        assertEquals(Money.valueOf(5), fiftyCredit.percent(10));
+        assertEquals(Money.valueOf(5.50), fiftyCredit.percent(11));
+        assertEquals(Money.valueOf(75), fiftyCredit.percent(150));
+        assertEquals(Money.valueOf(0.01), Money.valueOf(0.11).percent(10));
+        assertEquals(Money.valueOf(0.01), Money.valueOf(0.19).percent(10));
+    }
 }

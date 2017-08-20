@@ -1,5 +1,7 @@
 package pl.com.bottega.photostock.sales.model;
 
+import java.util.Currency;
+
 public class Money implements Comparable<Money> {
     public static final String DEFAULT_CURRENCY = "CREDIT";
     public static final Money ZERO = new Money();
@@ -89,5 +91,13 @@ public class Money implements Comparable<Money> {
     public boolean lte(Money other) {
         checkCurrency(other);
         return compareTo(other) <= 0;
+    }
+
+    public Money percent(int percent) {
+        return new Money(cents * percent / 100, currency);
+    }
+
+    public static Money valueOf(double value) {
+        return new Money((long) (value * 100.0), DEFAULT_CURRENCY);
     }
 }

@@ -13,14 +13,20 @@ public class ConsoleApp {
         Picture picture2 = new Picture(2L, tags, Money.valueOf(5));
         Picture picture3 = new Picture(3L, tags, Money.valueOf(15));
         Client client = new Client("Ja Nowak", new Address("ul. Północna 11", "Poland", "Lublin", "20-222"));
+        client.recharge(Money.valueOf(1000000));
         Reservation reservation = new Reservation(client);
 
-        reservation.add(picture1);
-        reservation.add(picture2);
-        reservation.add(picture3);
+        LightBox lightBox = new LightBox(client, "kotki");
+        lightBox.add(picture1);
+        lightBox.add(picture2);
+        lightBox.add(picture3);
+
+        LightBoxPresenter lightBoxPresenter = new LightBoxPresenter();
+        lightBoxPresenter.show(lightBox);
 
         reservation.add(picture1);
         reservation.add(picture2);
+        lightBoxPresenter.show(lightBox);
         reservation.add(picture3);
 
         System.out.println(String.format("W rezerwacji jest %d produktów", reservation.getItemsCount()));

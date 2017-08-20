@@ -12,16 +12,26 @@ public class Reservation {
     }
 
     public void add(Picture picture) {
+        if (!picture.isAvalible()) {
+            throw new IllegalStateException("Product is not avalible");
+        }
+        items.add(picture);
+        picture.reservedPer(owner);
     }
 
     public void remove(Picture picture) {
+        if (items.remove(picture)) {
+            picture.unreservedPer(owner);
+        } else {
+            throw new IllegalStateException("Product is not part of this reservation.");
+        }
     }
 
     public Offer generateOffer() {
-        return new Offer(items);
+        return new Offer(owner, items);
     }
 
     public int getItemsCount() {
-        return -1;
+        return items.size();
     }
 }

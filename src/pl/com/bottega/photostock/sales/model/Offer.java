@@ -5,10 +5,12 @@ import java.util.Collections;
 import java.util.LinkedList;
 
 public class Offer {
+    private Client owner;
     private Collection<Picture> items;
 
-    public Offer(Collection<Picture> items) {
+    public Offer(Client owner, Collection<Picture> items) {
         this.items = new LinkedList<>(items);
+        this.owner = owner;
     }
 
     public boolean sameAs(Offer offer, Money money) {
@@ -16,11 +18,15 @@ public class Offer {
     }
 
     public int getItemsCount() {
-        return -1;
+        return items.size();
     }
 
     public Money getTotalCost() {
-        return null;
+        Money amount = Money.ZERO;
+        for (Picture picture : items) {
+            amount.add(picture.calculatePrice(owner));
+        }
+        return amount;
     }
 
     public Collection<Picture> getItems() {

@@ -100,4 +100,17 @@ public class Money implements Comparable<Money> {
     public static Money valueOf(double value) {
         return new Money((long) (value * 100.0), DEFAULT_CURRENCY);
     }
+
+    public static Money valueOf(double value, String currency) {
+        return new Money((long) (value * 100.0), currency);
+    }
+
+    public Money convert(String targetCurrency, double exRate) {
+        return new Money(Math.round(cents * exRate), targetCurrency);
+    }
+
+    public String currency() {
+        return currency;
+    }
+
 }

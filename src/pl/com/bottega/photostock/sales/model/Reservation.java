@@ -1,5 +1,7 @@
 package pl.com.bottega.photostock.sales.model;
 
+import pl.com.bottega.photostock.sales.exception.ProductNotAvalibleException;
+
 import java.util.Collection;
 import java.util.LinkedList;
 
@@ -11,12 +13,10 @@ public class Reservation {
         this.owner = owner;
     }
 
-    public void add(Product picture) {
-        if (!picture.isAvalible()) {
-            throw new IllegalStateException("Product is not avalible");
-        }
-        items.add(picture);
-        picture.reservedPer(owner);
+    public void add(Product product) {
+        product.ensureAvailable();
+        items.add(product);
+        product.reservedPer(owner);
     }
 
     public void remove(Product picture) {

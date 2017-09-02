@@ -28,7 +28,7 @@ public class Offer {
     public Money getTotalCost() {
         Money amount = Money.ZERO;
         for (Product picture : items) {
-            amount.add(picture.calculatePrice(owner));
+            amount = amount.add(picture.calculatePrice(owner));
         }
         return amount;
     }

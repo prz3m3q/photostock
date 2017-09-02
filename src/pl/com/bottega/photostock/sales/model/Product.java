@@ -1,5 +1,7 @@
 package pl.com.bottega.photostock.sales.model;
 
+import pl.com.bottega.photostock.sales.exception.ProductNotAvalibleException;
+
 public interface Product {
     Money calculatePrice(Client client);
 
@@ -12,4 +14,10 @@ public interface Product {
     void soldPer(Client client);
 
     Long getNumber();
+
+    default void ensureAvailable() {
+        if (!isAvalible()) {
+            throw new ProductNotAvalibleException(this);
+        }
+    }
 }

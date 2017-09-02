@@ -1,5 +1,7 @@
 package pl.com.bottega.photostock.sales.model;
 
+import pl.com.bottega.photostock.sales.exception.ProductNotAvalibleException;
+
 public abstract class AbstractProduct implements Product {
     protected Long number;
     protected Money price;
@@ -24,9 +26,7 @@ public abstract class AbstractProduct implements Product {
 
     @Override
     public void reservedPer(Client client) {
-        if (!isAvalible()) {
-            throw new IllegalStateException("Product is not avalible");
-        }
+        ensureAvailable();
         reservedBy = client;
     }
 

@@ -1,5 +1,7 @@
 package pl.com.bottega.photostock.sales.model;
 
+import pl.com.bottega.photostock.sales.exception.ProductNotAvalibleException;
+
 import java.util.*;
 import java.util.List;
 
@@ -13,14 +15,12 @@ public class LightBox {
         this.owner = owner;
     }
 
-    public void add(Product picture) {
-        if (items.contains(picture)) {
+    public void add(Product product) {
+        if (items.contains(product)) {
             throw new IllegalStateException("Product already added");
         }
-        if (!picture.isAvalible()) {
-            throw new IllegalArgumentException("Product is not avalible");
-        }
-        items.add(picture);
+        product.ensureAvailable();
+        items.add(product);
     }
 
     public void remove(Product picture) {

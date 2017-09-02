@@ -9,7 +9,7 @@ public class ConsoleApp {
         Product picture1 = pictureRepository.get(1L);
         Product picture2 = pictureRepository.get(2L);
         Product picture3 = pictureRepository.get(3L);
-        Client client = new Client("Ja Nowak", new Address("ul. Północna 11", "Poland", "Lublin", "20-222"));
+        Client client = new VipClient("Ja Nowak", new Address("ul. Północna 11", "Poland", "Lublin", "20-222"));
         client.recharge(Money.valueOf(1000000));
         Reservation reservation = new Reservation(client);
 

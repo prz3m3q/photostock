@@ -8,14 +8,14 @@ import static org.junit.Assert.assertFalse;
 public class ClientTest {
 
     private final Address address = new Address("ul. Północna 11", "Poland", "Lublin", "20-222");
-    private Client clientWithCredit = new Client(
+    private Client clientWithCredit = new VipClient(
         "Ja Nowak",
         address,
         ClientStatus.VIP,
         Money.valueOf(100),
         Money.valueOf(100)
     );
-    private Client clientWithNoMoney = new Client("Ja Nowak", address);
+    private Client clientWithNoMoney = new VipClient("Ja Nowak", address);
 
     @Test
     public void shouldCheckIfClientCanAfford() {

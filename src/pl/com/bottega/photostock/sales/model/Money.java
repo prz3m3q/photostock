@@ -106,7 +106,7 @@ public class Money implements Comparable<Money> {
     }
 
     public Money convert(String targetCurrency, double exRate) {
-        return new Money(Math.round(cents * exRate), targetCurrency);
+        return new Money((long)(cents * exRate), targetCurrency);
     }
 
     public String currency() {

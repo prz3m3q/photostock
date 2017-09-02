@@ -4,13 +4,16 @@ import pl.com.bottega.photostock.sales.exception.ProductNotAvalibleException;
 
 import java.util.Collection;
 import java.util.LinkedList;
+import java.util.UUID;
 
 public class Reservation {
     private Client owner;
+    private String number;
     private Collection<Product> items = new LinkedList<>();
 
     public Reservation(Client owner) {
         this.owner = owner;
+        this.number = UUID.randomUUID().toString();
     }
 
     public void add(Product product) {
@@ -33,5 +36,9 @@ public class Reservation {
 
     public int getItemsCount() {
         return items.size();
+    }
+
+    public String getNumber() {
+        return number;
     }
 }

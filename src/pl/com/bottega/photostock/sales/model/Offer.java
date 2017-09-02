@@ -44,4 +44,15 @@ public class Offer {
             ", items=" + items +
             '}';
     }
+
+    public Client getOwner() {
+        return owner;
+    }
+
+    public Purchase purchase() {
+        Money cost = getTotalCost();
+        Purchase purchase = new Purchase(owner, getItems());
+        owner.charge(cost, String.format("Purchase number %s", purchase.getNumber()));
+        return purchase;
+    }
 }

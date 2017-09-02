@@ -57,7 +57,7 @@ public class Client {
     public Money balance() {
         Money sum = Money.ZERO;
         for (Transaction trans : transaction) {
-            sum.add(trans.getAmount());
+            sum = sum.add(trans.getAmount());
         }
         return sum;
     }

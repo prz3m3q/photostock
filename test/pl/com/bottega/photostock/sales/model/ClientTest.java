@@ -35,11 +35,21 @@ public class ClientTest {
     }
 
     @Test
-    public void shouldChargeAndRecharge() {
-        clientWithCredit.charge(Money.valueOf(200), "testowy zakup");
+    public void shouldChargeAndRechargeClient() {
+        // when
+        clientWithCredit.charge(Money.valueOf(200), "Testowy zakup");
         clientWithCredit.recharge(Money.valueOf(100));
 
+        //then
         assertTrue(clientWithCredit.canAfford(Money.valueOf(100)));
         assertFalse(clientWithCredit.canAfford(Money.valueOf(101)));
     }
+
+    @Test(expected = IllegalStateException.class)
+    public void shouldNotAllowToChargeMoreThanCanAfford() {
+        clientWithCredit.charge(Money.valueOf(50), "Testowy zakup");
+        clientWithCredit.charge(Money.valueOf(100), "Testowy zakup");
+        clientWithCredit.charge(Money.valueOf(100), "Testowy zakup");
+    }
+
 }

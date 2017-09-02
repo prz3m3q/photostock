@@ -6,14 +6,14 @@ import java.util.List;
 public class LightBox {
     private String name;
     private Client owner;
-    private List<Picture> items = new LinkedList<>();
+    private List<Product> items = new LinkedList<>();
 
     public LightBox(Client owner, String name) {
         this.name = name;
         this.owner = owner;
     }
 
-    public void add(Picture picture) {
+    public void add(Product picture) {
         if (items.contains(picture)) {
             throw new IllegalStateException("Product already added");
         }
@@ -23,9 +23,9 @@ public class LightBox {
         items.add(picture);
     }
 
-    public void remove(Picture picture) {
+    public void remove(Product picture) {
         if (!items.remove(picture)) {
-            throw new IllegalStateException("Picture is not part of this lightbox.");
+            throw new IllegalStateException("Product is not part of this lightbox.");
         }
     }
 
@@ -37,7 +37,7 @@ public class LightBox {
         return name;
     }
 
-    public List<Picture> getItems() {
+    public List<Product> getItems() {
         return Collections.unmodifiableList(items);
     }
 }

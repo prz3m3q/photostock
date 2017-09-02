@@ -5,13 +5,13 @@ import java.util.LinkedList;
 
 public class Reservation {
     private Client owner;
-    private Collection<Picture> items = new LinkedList<>();
+    private Collection<Product> items = new LinkedList<>();
 
     public Reservation(Client owner) {
         this.owner = owner;
     }
 
-    public void add(Picture picture) {
+    public void add(Product picture) {
         if (!picture.isAvalible()) {
             throw new IllegalStateException("Product is not avalible");
         }
@@ -19,7 +19,7 @@ public class Reservation {
         picture.reservedPer(owner);
     }
 
-    public void remove(Picture picture) {
+    public void remove(Product picture) {
         if (items.remove(picture)) {
             picture.unreservedPer(owner);
         } else {

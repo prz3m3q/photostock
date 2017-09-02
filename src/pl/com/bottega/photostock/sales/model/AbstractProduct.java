@@ -56,9 +56,9 @@ public abstract class AbstractProduct implements Product {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        Picture picture = (Picture) o;
+        Product product = (Product) o;
 
-        return number.equals(picture.number);
+        return number.equals(product.getNumber());
     }
 
     @Override
@@ -73,7 +73,7 @@ public abstract class AbstractProduct implements Product {
 
     @Override
     public String toString() {
-        return "\nPicture{" +
+        return "\nProduct{" +
             "number=" + number +
             ", price=" + price +
             '}';

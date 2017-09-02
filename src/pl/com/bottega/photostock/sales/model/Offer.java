@@ -4,14 +4,14 @@ import java.util.*;
 
 public class Offer {
     private Client owner;
-    private List<Picture> items;
+    private List<Product> items;
 
-    public Offer(Client owner, Collection<Picture> items) {
+    public Offer(Client owner, Collection<Product> items) {
         this.items = new LinkedList<>(items);
         this.owner = owner;
-        this.items.sort(new Comparator<Picture>() {
+        this.items.sort(new Comparator<Product>() {
             @Override
-            public int compare(Picture p1, Picture p2) {
+            public int compare(Product p1, Product p2) {
                 return p2.calculatePrice(Offer.this.owner).compareTo(p1.calculatePrice(Offer.this.owner));
             }
         });
@@ -27,13 +27,13 @@ public class Offer {
 
     public Money getTotalCost() {
         Money amount = Money.ZERO;
-        for (Picture picture : items) {
+        for (Product picture : items) {
             amount.add(picture.calculatePrice(owner));
         }
         return amount;
     }
 
-    public Collection<Picture> getItems() {
+    public Collection<Product> getItems() {
         return Collections.unmodifiableCollection(items);
     }
 

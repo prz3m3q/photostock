@@ -40,7 +40,7 @@ public abstract class AbstractProduct implements Product {
     }
 
     private void checkReservation(Client client) {
-        if (reservedBy != null || !reservedBy.equals(client)) {
+        if (reservedBy == null || !reservedBy.equals(client)) {
             throw new IllegalStateException(String.format("Product is not reserved by %s", client));
         }
     }
@@ -49,6 +49,10 @@ public abstract class AbstractProduct implements Product {
     public void soldPer(Client client) {
         checkReservation(client);
         owner = client;
+    }
+
+    public Money getPrice() {
+        return price;
     }
 
     @Override

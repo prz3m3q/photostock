@@ -1,9 +1,6 @@
 package pl.com.bottega.photostock.sales.infrastructure;
 
-import pl.com.bottega.photostock.sales.model.Money;
-import pl.com.bottega.photostock.sales.model.Picture;
-import pl.com.bottega.photostock.sales.model.Product;
-import pl.com.bottega.photostock.sales.model.ProductRepository;
+import pl.com.bottega.photostock.sales.model.*;
 
 import java.util.*;
 
@@ -38,6 +35,36 @@ public class InMemoryProductRepository implements ProductRepository {
             return Optional.empty();
     }
 
+    @Override
+    public List<Product> find(Client client, Set<String> tags, Money from, Money to) {
+        List<Product> findedProducts = new LinkedList<>();
+        Picture picture;
+        for (Product product : REPO.values()) {
+            if (!(product instanceof Picture)) {
+                continue;
+            }
+            picture = (Picture)product;
+            if (!matchesCriteria(picture, client, tags, from, to)) {
+                continue;
+            }
+            findedProducts.add(picture);
+        }
+        return findedProducts;
+    }
+
+    private boolean matchesCriteria(Picture picture, Client client, Set<String> tags, Money from, Money to) {
+        if (tags != null && !picture.getTags().containsAll(tags)) {
+            return false;
+        }
+        Money price = picture.calculatePrice(client);
+        if (from != null && from.gt(price)) {
+            return false;
+        }
+        if (to != null && to.lt(price)) {
+            return false;
+        }
+        return true;
+    }
 
     @Override
     public void save(Product product) {

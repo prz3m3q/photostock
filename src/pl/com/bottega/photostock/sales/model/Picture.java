@@ -14,4 +14,12 @@ public class Picture extends AbstractProduct {
     public Picture(Long number, Set<String> tags, Money price) {
         this(number, tags, price, true);
     }
+
+    public Set<String> getTags() {
+        return tags;
+    }
+
+    public boolean nasTags(Set<String> tags) {
+        return this.tags.containsAll(tags);
+    }
 }

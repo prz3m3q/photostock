@@ -1,4 +1,6 @@
-package pl.com.bottega.photostock.sales.model;
+package pl.com.bottega.photostock.sales.model.repositiories;
+
+import pl.com.bottega.photostock.sales.model.Reservation;
 
 public interface ReservationRepository {
     void save(Reservation reservation);

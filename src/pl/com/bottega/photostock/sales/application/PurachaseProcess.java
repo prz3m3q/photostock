@@ -1,10 +1,12 @@
 package pl.com.bottega.photostock.sales.application;
 
 import pl.com.bottega.photostock.sales.model.*;
+import pl.com.bottega.photostock.sales.model.repositiories.ClientRepository;
+import pl.com.bottega.photostock.sales.model.repositiories.ProductRepository;
+import pl.com.bottega.photostock.sales.model.repositiories.PurchaseRepository;
+import pl.com.bottega.photostock.sales.model.repositiories.ReservationRepository;
 
 import java.util.Collection;
-import java.util.Collections;
-import java.util.List;
 
 public class PurachaseProcess {
 

@@ -6,7 +6,9 @@ import pl.com.bottega.photostock.sales.model.repositiories.LightBoxRepository;
 import pl.com.bottega.photostock.sales.model.repositiories.ProductRepository;
 import pl.com.bottega.photostock.sales.model.repositiories.ReservationRepository;
 
+import java.util.LinkedList;
 import java.util.List;
+import java.util.Scanner;
 import java.util.Set;
 
 public class LightBoxManagement {
@@ -52,5 +54,9 @@ public class LightBoxManagement {
             productRepository.save(picture);
         }
         reservationRepository.save(reservation);
+    }
+
+    public List<LightBox> getLightBoxes(String clientNumber) {
+        return lightBoxRepository.getByClientNumber(clientNumber);
     }
 }

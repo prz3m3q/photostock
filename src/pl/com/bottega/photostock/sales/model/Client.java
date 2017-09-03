@@ -64,4 +64,12 @@ public abstract  class Client {
     public String getNumber() {
         return number;
     }
+
+    public String getName() {
+        return name;
+    }
+
+    public boolean hasLogin(String login) {
+        return name.equals(login);
+    }
 }

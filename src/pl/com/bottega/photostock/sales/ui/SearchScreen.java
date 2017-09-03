@@ -1,17 +1,60 @@
 package pl.com.bottega.photostock.sales.ui;
 
 import pl.com.bottega.photostock.sales.application.ProductsCatalog;
+import pl.com.bottega.photostock.sales.model.Money;
+import pl.com.bottega.photostock.sales.model.Picture;
 import pl.com.bottega.photostock.sales.model.Product;
+
+import java.util.*;
 
 public class SearchScreen {
 
+    private Scanner scanner;
+    private AutenticationMaganger autenticationMaganger;
     private ProductsCatalog productsCatalog;
 
-    public SearchScreen(ProductsCatalog productsCatalog) {
+    public SearchScreen(Scanner scanner, AutenticationMaganger autenticationMaganger, ProductsCatalog productsCatalog) {
+        this.scanner = scanner;
+        this.autenticationMaganger = autenticationMaganger;
         this.productsCatalog = productsCatalog;
     }
 
     public void show() {
+        System.out.println("Podaj kryteria wyszukiwania");
+        System.out.print("Tagi: ");
+        Set<String> tags = getTags();
+        System.out.print("Cena od: ");
+        Money priceFrom = getMoney();
+        System.out.print("Cena do: ");
+        Money priceTo = getMoney();
 
+        List<Product> productList = productsCatalog.find(autenticationMaganger.getClient(),tags, priceFrom, priceTo);
+
+        for (Product product : productList) {
+            showProduct(product);
+        }
+    }
+
+    private void showProduct(Product product) {
+        String productType = product instanceof Picture ? "Obrazek" : "Klip";
+        String tags = "";
+        if (product instanceof Picture) {
+            tags = ((Picture) product).getTags().toString();
+        }
+        Money price = product.calculatePrice(autenticationMaganger.getClient());
+        System.out.println(String.format("%d - %s - %s %s", product.getNumber(), productType, tags, price));
+    }
+
+    public Set<String> getTags() {
+        String line = scanner.nextLine();
+        String[] tagsArray = line.split(" ");
+        List<String> tagsList = Arrays.asList(tagsArray);
+        Set<String> tags = new HashSet<>(tagsList);
+        tags.remove("");
+        return tags;
+    }
+
+    public Money getMoney() {
+        return Money.valueOf(scanner.nextInt());
     }
 }

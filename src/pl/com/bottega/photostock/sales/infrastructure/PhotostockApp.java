@@ -10,9 +10,9 @@ import pl.com.bottega.photostock.sales.model.repositiories.ClientRepository;
 import pl.com.bottega.photostock.sales.model.repositiories.LightBoxRepository;
 import pl.com.bottega.photostock.sales.model.repositiories.ProductRepository;
 import pl.com.bottega.photostock.sales.model.repositiories.ReservationRepository;
-import pl.com.bottega.photostock.sales.ui.LightBoxManagementScreen;
-import pl.com.bottega.photostock.sales.ui.MainScreen;
-import pl.com.bottega.photostock.sales.ui.SearchScreen;
+import pl.com.bottega.photostock.sales.ui.*;
+
+import java.util.Scanner;
 
 public class PhotostockApp {
 
@@ -21,18 +21,22 @@ public class PhotostockApp {
     }
 
     public void start() {
+        Scanner scanner = new Scanner(System.in);
         LightBoxRepository lightBoxRepository = new InMemoryLightBoxRepository();
         ClientRepository clientRepository = new InMemoryClientRepository();
         ProductRepository productRepository = new InMemoryProductRepository();
         ReservationRepository reservationRepository = new InMemoryReservationRepository();
 
         LightBoxManagement lightBoxManagement = new LightBoxManagement(lightBoxRepository, clientRepository, productRepository, reservationRepository);
-        LightBoxManagementScreen lightBoxManagementScreen = new LightBoxManagementScreen(lightBoxManagement);
+        LightBoxManagementScreen lightBoxManagementScreen = new LightBoxManagementScreen(scanner, lightBoxManagement);
 
+        AutenticationMaganger autenticationMaganger = new AutenticationMaganger(clientRepository);
         ProductsCatalog productsCatalog = new ProductsCatalog(productRepository);
-        SearchScreen searchScreen = new SearchScreen(productsCatalog);
+        SearchScreen searchScreen = new SearchScreen(scanner, autenticationMaganger, productsCatalog);
+        AutenticationScreen autenticationScreen = new AutenticationScreen(scanner, autenticationMaganger);
 
-        MainScreen mainScreen = new MainScreen(lightBoxManagementScreen, searchScreen);
+        MainScreen mainScreen = new MainScreen(scanner, lightBoxManagementScreen, searchScreen);
+        autenticationScreen.show();
         mainScreen.show();
     }
 

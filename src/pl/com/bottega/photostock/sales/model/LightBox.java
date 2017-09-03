@@ -65,4 +65,8 @@ public class LightBox {
         }
         return findedPictures;
     }
+
+    public boolean hasClientNumber(String clientNumber) {
+        return clientNumber.equals(owner.getNumber());
+    }
 }

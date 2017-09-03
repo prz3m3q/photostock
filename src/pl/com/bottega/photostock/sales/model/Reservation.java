@@ -4,6 +4,7 @@ import pl.com.bottega.photostock.sales.exception.ProductNotAvalibleException;
 
 import java.util.Collection;
 import java.util.LinkedList;
+import java.util.List;
 import java.util.UUID;
 
 public class Reservation {
@@ -40,5 +41,12 @@ public class Reservation {
 
     public String getNumber() {
         return number;
+    }
+
+    public void addPictures(List<Picture> pictures) {
+        for (Picture picture : pictures) {
+            picture.ensureAvailable();
+        }
+        items.addAll(pictures);
     }
 }

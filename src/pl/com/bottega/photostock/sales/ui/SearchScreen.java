@@ -36,13 +36,22 @@ public class SearchScreen {
     }
 
     private void showProduct(Product product) {
-        String productType = product instanceof Picture ? "Obrazek" : "Klip";
+        String productType = product instanceof Picture ? "OBRAZEK" : "CLIP";
         String tags = "";
-        if (product instanceof Picture) {
+        if (product instanceof Picture)
             tags = ((Picture) product).getTags().toString();
-        }
         Money price = product.calculatePrice(autenticationMaganger.getClient());
         System.out.println(String.format("%d - %s - %s %s", product.getNumber(), productType, tags, price));
+    }
+
+    private Money getMoney() {
+        String moneyString = scanner.nextLine();
+        try {
+            Integer moneyInteger = Integer.parseInt(moneyString);
+            return Money.valueOf(moneyInteger);
+        } catch (Exception ex) {
+            return null;
+        }
     }
 
     public Set<String> getTags() {
@@ -52,9 +61,5 @@ public class SearchScreen {
         Set<String> tags = new HashSet<>(tagsList);
         tags.remove("");
         return tags;
-    }
-
-    public Money getMoney() {
-        return Money.valueOf(scanner.nextInt());
     }
 }

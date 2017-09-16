@@ -38,6 +38,7 @@ public class LightBoxManagementScreen {
                 System.out.println(String.format("%d. - %s", ++index, lightBox.getName()));
             }
         }
+        lightBoxActions();
     }
 
     private void lightBoxActions() {
@@ -51,7 +52,7 @@ public class LightBoxManagementScreen {
                     addNewLightBox();
                     break;
                 case 2:
-                    if(lightBoxes.size() > 0) {
+                    if (lightBoxes.size() > 0) {
                         showLightBox();
                     }
                     break;
@@ -84,7 +85,6 @@ public class LightBoxManagementScreen {
                     break;
                 case 2:
                     purchaseLightBoxScreen.show(lightBox);
-                    break;
                 case 3:
                     return;
                 default:
@@ -111,7 +111,7 @@ public class LightBoxManagementScreen {
 
     private void showMenu() {
         System.out.println("1. Dodaj nowy LightBox.");
-        if (lightBoxes.size() > 0)
+        if (lightBoxes != null && lightBoxes.size() > 0)
             System.out.println("2. Wyświetl LightBox.");
         System.out.println("3. Wróć do menu.");
         System.out.println("Co chcesz zrobić?");

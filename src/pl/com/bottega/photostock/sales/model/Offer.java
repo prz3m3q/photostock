@@ -17,8 +17,8 @@ public class Offer {
         });
     }
 
-    public boolean sameAs(Offer offer, Money money) {
-        return false;
+    public boolean sameAs(Offer offer, Money tolerance) {
+        return getTotalCost().substract(offer.getTotalCost()).abs().lte(tolerance);
     }
 
     public int getItemsCount() {

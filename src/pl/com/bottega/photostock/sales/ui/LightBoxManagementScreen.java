@@ -95,7 +95,8 @@ public class LightBoxManagementScreen {
 
     private void showLightBoxMenu() {
         System.out.println("1. Dodaj produkt do LightBox'a");
-        System.out.println("2. Wróć do poprzedniego menu.");
+        System.out.println("2. Zakup produkty z lajboxa.");
+        System.out.println("3. Wróć do poprzedniego menu.");
         System.out.println("Co chcesz zrobić?");
     }
 

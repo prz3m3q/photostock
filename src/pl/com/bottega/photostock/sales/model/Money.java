@@ -1,5 +1,7 @@
 package pl.com.bottega.photostock.sales.model;
 
+import pl.com.bottega.photostock.sales.ui.MainScreen;
+
 import java.util.Currency;
 
 public class Money implements Comparable<Money> {
@@ -113,4 +115,7 @@ public class Money implements Comparable<Money> {
         return currency;
     }
 
+    public Money abs() {
+        return new Money(Math.abs(cents), currency);
+    }
 }

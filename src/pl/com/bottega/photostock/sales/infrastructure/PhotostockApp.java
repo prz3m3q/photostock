@@ -2,14 +2,9 @@ package pl.com.bottega.photostock.sales.infrastructure;
 
 import pl.com.bottega.photostock.sales.application.LightBoxManagement;
 import pl.com.bottega.photostock.sales.application.ProductsCatalog;
-import pl.com.bottega.photostock.sales.infrastructure.repositories.InMemoryClientRepository;
-import pl.com.bottega.photostock.sales.infrastructure.repositories.InMemoryLightBoxRepository;
-import pl.com.bottega.photostock.sales.infrastructure.repositories.InMemoryProductRepository;
-import pl.com.bottega.photostock.sales.infrastructure.repositories.InMemoryReservationRepository;
-import pl.com.bottega.photostock.sales.model.repositiories.ClientRepository;
-import pl.com.bottega.photostock.sales.model.repositiories.LightBoxRepository;
-import pl.com.bottega.photostock.sales.model.repositiories.ProductRepository;
-import pl.com.bottega.photostock.sales.model.repositiories.ReservationRepository;
+import pl.com.bottega.photostock.sales.application.PurachaseProcess;
+import pl.com.bottega.photostock.sales.infrastructure.repositories.*;
+import pl.com.bottega.photostock.sales.model.repositiories.*;
 import pl.com.bottega.photostock.sales.ui.*;
 
 import java.util.Scanner;
@@ -26,11 +21,15 @@ public class PhotostockApp {
         ClientRepository clientRepository = new InMemoryClientRepository();
         ProductRepository productRepository = new InMemoryProductRepository();
         ReservationRepository reservationRepository = new InMemoryReservationRepository();
-
-        LightBoxManagement lightBoxManagement = new LightBoxManagement(lightBoxRepository, clientRepository, productRepository, reservationRepository);
-        LightBoxManagementScreen lightBoxManagementScreen = new LightBoxManagementScreen(scanner, lightBoxManagement);
+        PurchaseRepository purchaseRepository = new InMemoryPurchaseRepository();
 
         AutenticationMaganger autenticationMaganger = new AutenticationMaganger(clientRepository);
+        LightBoxManagement lightBoxManagement = new LightBoxManagement(lightBoxRepository, clientRepository, productRepository, reservationRepository);
+        AddProductToLightBoxScreen addProductToLightBoxScreen = new AddProductToLightBoxScreen(lightBoxManagement, scanner);
+        PurachaseProcess purachaseProcess = new PurachaseProcess(clientRepository, reservationRepository, productRepository, purchaseRepository);
+        PurchaseLightBoxScreen purchaseLightBoxScreen = new PurchaseLightBoxScreen(lightBoxManagement, scanner, purachaseProcess);
+        LightBoxManagementScreen lightBoxManagementScreen = new LightBoxManagementScreen(scanner, lightBoxManagement, autenticationMaganger, addProductToLightBoxScreen, purchaseLightBoxScreen);
+
         ProductsCatalog productsCatalog = new ProductsCatalog(productRepository);
         SearchScreen searchScreen = new SearchScreen(scanner, autenticationMaganger, productsCatalog);
         AutenticationScreen autenticationScreen = new AutenticationScreen(scanner, autenticationMaganger);

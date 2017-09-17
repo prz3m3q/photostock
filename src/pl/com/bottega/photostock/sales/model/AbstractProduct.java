@@ -8,10 +8,18 @@ public abstract class AbstractProduct implements Product {
     protected boolean active;
     private Client reservedBy, owner;
 
-    public AbstractProduct(Money price, Boolean active, Long number) {
+    public AbstractProduct(Money price, boolean active, Long number) {
         this.price = price;
         this.active = active;
         this.number = number;
+    }
+
+    public AbstractProduct(Long number, Money price, Client reservedBy, Client owner, boolean active) {
+        this.number = number;
+        this.price = price;
+        this.active = active;
+        this.reservedBy = reservedBy;
+        this.owner = owner;
     }
 
     @Override

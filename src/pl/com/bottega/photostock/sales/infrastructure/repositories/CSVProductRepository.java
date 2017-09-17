@@ -14,6 +14,7 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
+import java.util.function.Supplier;
 
 public class CSVProductRepository implements ProductRepository {
 
@@ -27,33 +28,7 @@ public class CSVProductRepository implements ProductRepository {
 
     @Override
     public Product get(Long number) {
-        try (BufferedReader bf = new BufferedReader(new FileReader(path))) {
-            String line;
-            while ((line = bf.readLine()) != null) {
-                String[] lineSplit = line.split(",");
-                if (lineSplit[0].equals(number.toString())) {
-                    Long nr = Long.parseLong(lineSplit[0]);
-                    String[] tags = lineSplit[1].split(";");
-                    Money price = Money.valueOf(Integer.parseInt(lineSplit[2]));
-                    boolean active = Boolean.valueOf(lineSplit[3]);
-                    String reservedByNumber = lineSplit[4];
-                    String ownerNumber = lineSplit[5];
-                    return new Picture(
-                        nr,
-                        tags,
-                        price,
-                        findClient(reservedByNumber),
-                        findClient(ownerNumber),
-                        active
-                    );
-                }
-            }
-            throw new IllegalArgumentException("No such obkject in repository");
-        } catch (FileNotFoundException e) {
-            throw new IllegalArgumentException("No such object in repository.");
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+        return getOptional(number).orElseThrow((Supplier<RuntimeException>) () -> new IllegalArgumentException("No such obkject in repository"));
     }
 
     private Client findClient(String number) {
@@ -70,7 +45,33 @@ public class CSVProductRepository implements ProductRepository {
 
     @Override
     public Optional<Product> getOptional(Long number) {
-        return null;
+        try (BufferedReader bf = new BufferedReader(new FileReader(path))) {
+            String line;
+            while ((line = bf.readLine()) != null) {
+                String[] lineSplit = line.split(",");
+                if (lineSplit[0].equals(number.toString())) {
+                    Long nr = Long.parseLong(lineSplit[0]);
+                    String[] tags = lineSplit[1].split(";");
+                    Money price = Money.valueOf(Integer.parseInt(lineSplit[2]));
+                    boolean active = Boolean.valueOf(lineSplit[3]);
+                    String reservedByNumber = lineSplit[4];
+                    String ownerNumber = lineSplit[5];
+                    return Optional.of(new Picture(
+                        nr,
+                        tags,
+                        price,
+                        findClient(reservedByNumber),
+                        findClient(ownerNumber),
+                        active
+                    ));
+                }
+            }
+            return Optional.empty();
+        } catch (FileNotFoundException e) {
+            return Optional.empty();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     @Override

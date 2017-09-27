@@ -20,4 +20,12 @@ public interface Product {
             throw new ProductNotAvalibleException(this);
         }
     }
+
+    Money getPrice();
+
+    boolean getActive();
+
+    String getReservedByNumber();
+
+    String getOwnerNumber();
 }

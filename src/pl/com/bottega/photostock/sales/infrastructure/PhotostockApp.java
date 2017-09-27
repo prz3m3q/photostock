@@ -19,7 +19,7 @@ public class PhotostockApp {
         Scanner scanner = new Scanner(System.in);
         LightBoxRepository lightBoxRepository = new InMemoryLightBoxRepository();
         ClientRepository clientRepository = new InMemoryClientRepository();
-        ProductRepository productRepository = new InMemoryProductRepository();
+        CSVProductRepository productRepository = new CSVProductRepository("/home/przemek/products.csv", clientRepository);
         ReservationRepository reservationRepository = new InMemoryReservationRepository();
         PurchaseRepository purchaseRepository = new InMemoryPurchaseRepository();
 

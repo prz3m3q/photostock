@@ -90,4 +90,16 @@ public abstract class AbstractProduct implements Product {
             ", price=" + price +
             '}';
     }
+
+    public boolean getActive() {
+        return active;
+    }
+
+    public String getReservedByNumber() {
+        return reservedBy.getNumber();
+    }
+
+    public String getOwnerNumber() {
+        return owner.getNumber();
+    }
 }

@@ -96,10 +96,16 @@ public abstract class AbstractProduct implements Product {
     }
 
     public String getReservedByNumber() {
+        if (reservedBy == null) {
+            return null;
+        }
         return reservedBy.getNumber();
     }
 
     public String getOwnerNumber() {
+        if (owner == null) {
+            return null;
+        }
         return owner.getNumber();
     }
 }

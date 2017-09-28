@@ -61,13 +61,13 @@ public class CSVProductRepository implements ProductRepository {
     }
 
     private String[] stringToLine(Product product) {
-        String[] productLine = null;
+        String[] productLine = new String[6];
         productLine[0] = String.valueOf(product.getNumber());
         if (product instanceof Picture) {
             Picture picture = (Picture)product;
             productLine[1] = String.join(";", picture.getTags());
         }
-        productLine[2] = product.getPrice().toString();
+        productLine[2] = product.getPrice().;
         productLine[3] = String.valueOf(product.getActive());
         productLine[4] = product.getReservedByNumber();
         productLine[5] = product.getOwnerNumber();

@@ -67,7 +67,7 @@ public class CSVProductRepository implements ProductRepository {
             Picture picture = (Picture)product;
             productLine[1] = String.join(";", picture.getTags());
         }
-        productLine[2] = product.getPrice().;
+        productLine[2] = product.getPrice().toString();
         productLine[3] = String.valueOf(product.getActive());
         productLine[4] = product.getReservedByNumber();
         productLine[5] = product.getOwnerNumber();
